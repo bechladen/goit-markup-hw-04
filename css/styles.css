@@ -21,6 +21,7 @@
   --indent-col: 24px;
   --indent-row: var(--indent-col);
   --items: 4;
+  --trns: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 /* #endregion Variables */
 /* #region Base-Styles */
@@ -115,6 +116,8 @@ img {
   border-radius: 4px;
   border: none;
   box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.15);
+  transition: var(--trns);
+  transition-property: background-color;
 }
 .btn:hover,
 .btn:focus {
@@ -186,9 +189,15 @@ img {
   gap: 40px;
 }
 .nav-link {
+  position: relative;
   color: var(--dark-cl);
   display: block;
   padding: 24px 0;
+  transition: var(--trns);
+  transition-property: color;
+}
+.nav-link.current {
+  color: var(--pressed-state-cl);
 }
 .nav-link:hover,
 .nav-link:focus {
@@ -202,10 +211,26 @@ img {
 }
 .address-link {
   color: currentColor;
+  transition: var(--trns);
+  transition-property: color;
 }
 .address-link:hover,
 .address-link:focus {
   color: var(--pressed-state-cl);
+}
+.nav-link::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  display: block;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: transparent;
+}
+.nav-link.current::after {
+  background-color: var(--pressed-state-cl);
 }
 /* #endregion Header */
 /* #region Hero */
@@ -213,12 +238,33 @@ img {
   background-color: var(--dark-cl);
   height: 600px;
   padding: 188px 0;
+  max-width: 1440px;
+  margin: 0 auto;
+  background-image: linear-gradient(
+      rgba(46, 47, 66, 0.7),
+      rgba(46, 47, 66, 0.7)
+    ),
+    url(../images/hero/image-1.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
 }
 
 /* #endregion Hero */
 /* #region Benefits */
 .benefits-item .section-subtitle {
   margin-bottom: 8px;
+}
+.benefits-wrapper {
+  width: 264px;
+  height: 112px;
+  border-radius: 4px;
+  border: 1px solid var(--subtle-text-cl);
+  background: var(--light-cl);
+  margin-bottom: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 /* #endregion Benefits */
 /* #region Team */
@@ -238,6 +284,38 @@ img {
 }
 .employee-card-data .section-subtitle {
   margin-bottom: 8px;
+}
+.employee-card-data .text {
+  margin-bottom: 8px;
+}
+/* Socials */
+.socials {
+  display: flex;
+  padding: 0 16px;
+  justify-content: space-between;
+}
+.socials-item {
+  width: 40px;
+  height: 40px;
+}
+.socials-link {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  color: var(--light-cl);
+  background-color: var(--primary-brand-cl);
+  transition: var(--trns);
+  transition-property: background-color;
+}
+.socials-link:hover,
+.socials-link:focus {
+  background-color: var(--pressed-state-cl);
+}
+.socials-icon {
+  fill: currentColor;
 }
 /* #endregion Team */
 /* #region Portfolio */
